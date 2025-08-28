@@ -1,4 +1,4 @@
-# flutter_pemula_1
+# flutter_dicoding_pemula
 
 A new Flutter project.
 
