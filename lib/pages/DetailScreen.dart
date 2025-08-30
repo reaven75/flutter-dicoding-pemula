@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pemula_1/data/tourism_place.dart';
+import 'package:flutter_pemula_1/data/type_of_cat.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:another_carousel_pro/another_carousel_pro.dart';
+
 
 class DetailScreen extends StatefulWidget {
-  final TourismPlace place;
+  final AdoptionCat adopt;
 
-  const DetailScreen({super.key, required this.place});
+  const DetailScreen({super.key, required this.adopt});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -13,7 +15,6 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +28,23 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Hero(
-                      tag: widget.place.imageAsset,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12.0),
-                        child: Image.asset(
-                          widget.place.imageAsset,
-                          fit: BoxFit.cover,
-                          height: 350,
+                      tag: widget.adopt.imageProfile,
+                      child: SizedBox(
+                        height: 250,
+                        width: double.infinity,
+                        child: AnotherCarousel(
+                          images: widget.adopt.imageUrl
+                              .map((url) => NetworkImage(url))
+                              .toList(),
+                          dotSize: 6.0,
+                          dotSpacing: 15.0,
+                          dotColor: Colors.black,
+                          indicatorBgPadding: 5.0,
+                          dotBgColor: Colors.grey[100],
+                          borderRadius: true,
+                          moveIndicatorFromBottom: 180.0,
+                          noRadiusForIndicator: true,
+                          boxFit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -57,20 +68,6 @@ class _DetailScreenState extends State<DetailScreen> {
                             },
                           ),
                         ),
-                        CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                            icon: Icon(
-                              isFavorite ? Icons.favorite : Icons.favorite_border,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                isFavorite = !isFavorite;
-                              });
-                            },
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -83,77 +80,31 @@ class _DetailScreenState extends State<DetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.place.name,
+                    widget.adopt.name,
                     style: const TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 4.0),
-                  Row(
-                    children: [
-                      Icon(Icons.location_on, color: Colors.blue),
-                      Text(widget.place.location),
-                    ],
-                  ),
-                  const SizedBox(height: 16.0),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 25.0),
-                    child: Text(
-                      widget.place.description,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      maxLines: 4,
-                      textAlign: TextAlign.justify,
-                      
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Text("Galery", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                   const SizedBox(height: 8.0),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: widget.place.imageUrls.map((image) {
-                        return GestureDetector(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                  backgroundColor: Colors.transparent,
-                                  insetPadding: EdgeInsets.all(10),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: PhotoView(
-                                        imageProvider: NetworkImage(image),
-                                        backgroundDecoration: BoxDecoration(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                              },
-                            );
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                image,
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
+                  Text(
+                    "Breed",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
+                  Text(widget.adopt.breed),
+                  const SizedBox(height: 26.0),
+                  Text(
+                    widget.adopt.description,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 4,
+                    textAlign: TextAlign.justify,
+                  ),
+                  const SizedBox(height: 16.0),
+
+                  const SizedBox(height: 8.0),
                 ],
               ),
             ),
