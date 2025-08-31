@@ -42,8 +42,8 @@ var adoptionCatList = [
       "https://consumer-cms.petfinder.com/sites/default/files/images/content/Siamese%20Cat%202.jpg",
       "https://consumer-cms.petfinder.com/sites/default/files/images/content/Siamese%20Cat%204.jpg",
     ],
-    isAvailable: true,
-    isVaccinated: true,
+    isAvailable: false,
+    isVaccinated: false,
   ),
   AdoptionCat(
     name: "Fluffy",
