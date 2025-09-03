@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pemula_1/data/type_of_cat.dart';
+import 'package:flutter_pemula_1/pages/Homepage.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:another_carousel_pro/another_carousel_pro.dart';
 
@@ -13,6 +14,18 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  
+  @override
+  void initState() {
+    main();
+    super.initState();
+  }
+
+  void main() {
+    Cat myCat = Cat();
+    print(myCat.catName);
+  }
+
   bool isFavorite = false;
 
   Icon _getGenderIcon(Gender gender) {
@@ -20,6 +33,18 @@ class _DetailScreenState extends State<DetailScreen> {
       Gender.male => const Icon(Icons.male, color: Colors.blue),
       Gender.female => const Icon(Icons.female, color: Colors.pink),
     };
+  }
+
+  void toggleBookmark(AdoptionCat adopt) {
+    setState(() {
+      if (adopt.isBookmarked) {
+        adopt.isBookmarked = false;
+        bookmarkAdoptionList.remove(adopt);
+      } else {
+        adopt.isBookmarked = true;
+        bookmarkAdoptionList.add(adopt);
+      }
+    });
   }
 
   @override
@@ -92,6 +117,20 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                             onPressed: () {
                               Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            icon: Icon(
+                              widget.adopt.isBookmarked
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
+                              toggleBookmark(widget.adopt);
                             },
                           ),
                         ),
@@ -187,7 +226,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           thickness: 1, // ketebalan garis
                           width: 30, // jarak antar widget
                         ),
-                    
+
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -201,12 +240,12 @@ class _DetailScreenState extends State<DetailScreen> {
                             Text(widget.adopt.age.toString()),
                           ],
                         ),
-                          VerticalDivider(
+                        VerticalDivider(
                           color: Colors.grey[400],
                           thickness: 1, // ketebalan garis
                           width: 30, // jarak antar widget
                         ),
-                       
+
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -249,8 +288,6 @@ class _DetailScreenState extends State<DetailScreen> {
                   const SizedBox(height: 16.0),
 
                   const SizedBox(height: 8.0),
-
-                  
                 ],
               ),
             ),

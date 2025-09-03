@@ -11,6 +11,7 @@ class AdoptionCat {
   final bool isVaccinated;
   final String description;
   final String imageProfile;
+  bool isBookmarked;
   List<String> imageUrl;
 
   AdoptionCat({
@@ -24,8 +25,11 @@ class AdoptionCat {
     required this.imageUrl,
     required this.isAvailable,
     required this.isVaccinated,
+    this.isBookmarked = false,
   });
 }
+
+List<AdoptionCat> bookmarkAdoptionList = [];
 
 
 var adoptionCatList = [
