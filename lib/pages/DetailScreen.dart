@@ -14,17 +14,13 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  
+
   @override
   void initState() {
-    main();
     super.initState();
   }
 
-  void main() {
-    Cat myCat = Cat();
-    print(myCat.catName);
-  }
+  
 
   bool isFavorite = false;
 

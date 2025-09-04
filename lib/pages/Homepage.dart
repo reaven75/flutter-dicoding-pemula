@@ -197,9 +197,3 @@ class _HomePageState extends State<HomePage> {
 }
 
 
-class Cat {
-  final String _catName = "test";
-
-
-  String get catName => _catName;
-}
