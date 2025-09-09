@@ -10,10 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final String _catName = "";
-
-  String get catName => _catName;
-
   bool isFavorite = false;
 
   @override
@@ -195,5 +191,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-

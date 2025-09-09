@@ -1,36 +1,38 @@
-
-
-
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_pemula_1/data/type_of_cat.dart';
-import 'package:flutter_pemula_1/pages/DetailScreen.dart';
+
+import 'package:flutter_pemula_1/provider/bookmark_provider.dart';
+import 'package:provider/provider.dart';
 
 class BookmarkScreen extends StatelessWidget {
-
-  
-  const BookmarkScreen({super.key, });
+  const BookmarkScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bookmark Page'),
-      ),
-      body: bookmarkAdoptionList.isEmpty ? const Center(
-        child: Text('No Bookmarked Cats'),
-      ) : ListView.builder(
-        itemCount: bookmarkAdoptionList.length,
-        itemBuilder: (context, index) {
-          final cat = bookmarkAdoptionList[index];
-          return ListTile(
-            leading: Image.network(cat.imageProfile),
-            title: Text(cat.name),
-            subtitle: Text(cat.location),
-           
+      body: Consumer<BookmarkProvider>(
+        builder: (context, value, child) {
+          final bookmarkList = value.bookmarkList;
+
+          if(bookmarkList.isEmpty){
+            return const Center(
+              child: Text("No Bookmark Data",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+            );
+          }
+
+
+          return ListView.builder(
+            itemCount: bookmarkList.length,
+            itemBuilder: (context, index) {
+              final cat = bookmarkList[index];
+              return ListTile(
+                leading: Image.network(cat.imageProfile),
+                title: Text(cat.name),
+                subtitle: Text(cat.location),
+              );
+            },
           );
-        },),
+        },
+      ),
     );
   }
 }

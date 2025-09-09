@@ -19,8 +19,6 @@ class _ProviderMainScreenState extends State<ProviderMainScreen> {
   Widget build(BuildContext context) {
     final valueCounter = context.watch<CounterProvider>();
     
-   
-
     return  Scaffold(
       body: SafeArea(
         child: Center(

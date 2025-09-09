@@ -2,6 +2,7 @@
 enum Gender { male, female }
 
 class AdoptionCat {
+  final int id;
   final String name;
   final String breed;
   final Gender gender;
@@ -15,6 +16,7 @@ class AdoptionCat {
   List<String> imageUrl;
 
   AdoptionCat({
+    required this.id,
     required this.name,
     required this.breed,
     required this.gender,
@@ -34,6 +36,7 @@ List<AdoptionCat> bookmarkAdoptionList = [];
 
 var adoptionCatList = [
   AdoptionCat(
+    id: 1,
     name: "Whiskers",
     breed: "Siamese",
     gender: Gender.male,
@@ -50,6 +53,7 @@ var adoptionCatList = [
     isVaccinated: false,
   ),
   AdoptionCat(
+     id: 2,
     name: "Fluffy",
     breed: "Persian",
     gender: Gender.female,
@@ -66,6 +70,7 @@ var adoptionCatList = [
     isVaccinated: false,
   ),
   AdoptionCat(
+     id: 3,
     name: "Shadow",
     breed: "Maine Coon",
     gender: Gender.male,
@@ -84,6 +89,7 @@ var adoptionCatList = [
   ),
 
   AdoptionCat(
+     id: 4,
     name: "Mittens",
     breed: "British Shorthair",
     gender: Gender.female,
@@ -103,6 +109,7 @@ var adoptionCatList = [
  
 
   AdoptionCat(
+     id: 5,
     name: "Bella",
     breed: "Sphynx",
     gender: Gender.female,
@@ -122,6 +129,7 @@ var adoptionCatList = [
   
 
   AdoptionCat(
+     id: 6,
     name: "Charlie",
     breed: "Bengal",
     gender: Gender.male,
@@ -139,6 +147,7 @@ var adoptionCatList = [
   ),
 
   AdoptionCat(
+     id: 7,
     name: "Bella",
     breed: "Cornish Rex",
     gender: Gender.female,
@@ -156,6 +165,7 @@ var adoptionCatList = [
   ),
 
   AdoptionCat(
+     id: 8,
     name: "Oliver",
     breed: "Munchkin",
     gender: Gender.male,
@@ -173,6 +183,7 @@ var adoptionCatList = [
   ),
 
   AdoptionCat(
+     id: 9,
     name: "Charlie",
     breed: "Bombay",
     gender: Gender.male,
@@ -190,6 +201,7 @@ var adoptionCatList = [
   ),
 
   AdoptionCat(
+     id: 10,
     name: "Charlie",
     breed: "Ragdoll",
     gender: Gender.male,

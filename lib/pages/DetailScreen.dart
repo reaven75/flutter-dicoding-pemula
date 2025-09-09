@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pemula_1/data/type_of_cat.dart';
 import 'package:flutter_pemula_1/pages/Homepage.dart';
+import 'package:flutter_pemula_1/provider/bookmark_provider.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:another_carousel_pro/another_carousel_pro.dart';
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
   final AdoptionCat adopt;
@@ -22,7 +24,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   
 
-  bool isFavorite = false;
+  
 
   Icon _getGenderIcon(Gender gender) {
     return switch (gender) {
@@ -31,17 +33,6 @@ class _DetailScreenState extends State<DetailScreen> {
     };
   }
 
-  void toggleBookmark(AdoptionCat adopt) {
-    setState(() {
-      if (adopt.isBookmarked) {
-        adopt.isBookmarked = false;
-        bookmarkAdoptionList.remove(adopt);
-      } else {
-        adopt.isBookmarked = true;
-        bookmarkAdoptionList.add(adopt);
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,19 +107,26 @@ class _DetailScreenState extends State<DetailScreen> {
                             },
                           ),
                         ),
-                        CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                            icon: Icon(
-                              widget.adopt.isBookmarked
-                                  ? Icons.bookmark
-                                  : Icons.bookmark_border,
-                              color: Colors.black,
+                        Consumer<BookmarkProvider>(
+                          builder: (context, value, _) {
+                          final isBookmarked = value.isBookmarked(widget.adopt);
+                          
+                          return CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: Icon(
+                                isBookmarked
+                                    ? Icons.bookmark
+                                    : Icons.bookmark_border,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {
+                                value.toggleBookmarked(widget.adopt);
+                              },
                             ),
-                            onPressed: () {
-                              toggleBookmark(widget.adopt);
-                            },
-                          ),
+                          );  
+                          },
+                          
                         ),
                       ],
                     ),
